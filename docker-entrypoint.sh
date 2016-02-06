@@ -28,6 +28,10 @@ slave_action() {
 			cp /opt/baseconfig/postgresql.conf "$PGDATA/postgresql.conf"
 		fi
 
+        if [ -f "/tmp/postgresql.trigger"]; then
+            rm /tmp/postgresql.trigger
+        fi
+
 		cp /opt/baseconfig/recovery.conf "$PGDATA/recovery.conf"
 		echo "primary_conninfo = 'host=$POSTGRES_MASTER_IP port=$POSTGRES_MASTER_PORT user=rep password=$POSTGRES_REPLICATION_PASSWORD'" >> "$PGDATA/recovery.conf"
 	fi
